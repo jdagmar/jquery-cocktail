@@ -6,3 +6,7 @@ jQuery version of [how-about-a-cocktail](https://github.com/jdagmar/how-about-a-
 
 ### Resources
 * [TheCocktailDB](https://www.thecocktaildb.com/)
+
+
+### Todo
+* Close modal when tabbing
