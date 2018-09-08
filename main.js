@@ -32,6 +32,26 @@ const fetchRandomDrink = () => {
     });
 };
 
+const fetchDrinkById = id => {
+    $.ajax({
+        url: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`,
+    }).done(res => {
+        state.choosenDrink = res;
+        const drink = state.choosenDrink.drinks[0];
+
+        const ingredients = getDrinkIngredients(drink);
+        const listItems = ingredients.map(({ ingredient, measure }) => {
+            return `<li class="modal-recipe-item">
+                            ${ingredient + ' ' + measure}
+                        </li>`;
+        });
+
+        $('#modal-drink-name').text(drink.strDrink);
+        $('#modal-recipe-list').append(listItems);
+        $('#modal-instructions').text(drink.strInstructions);
+    });
+};
+
 // since api doesnt returns arrays of ingredients we filter
 // and match them with the measurements here
 const getDrinkIngredients = drink => {
@@ -52,6 +72,15 @@ const getDrinkIngredients = drink => {
         .filter(pair => pair.ingredient !== '');
 
     return ingredients;
+};
+
+const openModal = () => {
+    console.log('tja');
+    $('#modal').show();
+    $('html').css({
+        overflow: 'hidden',
+        height: '100%',
+    });
 };
 
 // inits the app
@@ -89,34 +118,18 @@ $('#gin-drinks-btn').click(() => {
             );
 
             // adds clickevent to each listitem to trigger the modal
+            $(drinkEl).keypress(ev => {
+                const key = ev.which;
+                if (key === 13 || key === 32) {
+                    openModal();
+                    fetchDrinkById(drink.idDrink);
+                    ev.preventDefault();
+                }
+            });
+
             $(drinkEl).click(() => {
-                $('#modal').show();
-                $('html').css({
-                    overflow: 'hidden',
-                    height: '100%',
-                });
-
-                $.ajax({
-                    url: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${
-                        drink.idDrink
-                    }`,
-                }).done(res => {
-                    state.choosenDrink = res;
-                    const drink = state.choosenDrink.drinks[0];
-
-                    const ingredients = getDrinkIngredients(drink);
-                    const listItems = ingredients.map(
-                        ({ ingredient, measure }) => {
-                            return `<li class="modal-recipe-item">
-                                        ${ingredient + ' ' + measure}
-                                    </li>`;
-                        }
-                    );
-
-                    $('#modal-drink-name').text(drink.strDrink);
-                    $('#modal-recipe-list').append(listItems);
-                    $('#modal-instructions').text(drink.strInstructions);
-                });
+                openModal();
+                fetchDrinkById(drink.idDrink);
             });
 
             return drinkEl;
@@ -138,7 +151,7 @@ $('#vodka-drinks-btn').click(() => {
 
         const drinks = state.vodka.drinks.map(drink => {
             const drinkEl = $(
-                `<li class="list-item">
+                `<li class="list-item" tabIndex="0">
                     <figure class="figure">
                         <img id="multiple-drink-image" 
                              class="drink-image" 
@@ -150,35 +163,20 @@ $('#vodka-drinks-btn').click(() => {
             );
 
             // adds clickevent to each listitem to trigger the modal
-            $(drinkEl).click(() => {
-                $('#modal').show();
-                $('html').css({
-                    overflow: 'hidden',
-                    height: '100%',
-                });
-
-                $.ajax({
-                    url: `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${
-                        drink.idDrink
-                    }`,
-                }).done(res => {
-                    state.choosenDrink = res;
-                    const drink = state.choosenDrink.drinks[0];
-
-                    const ingredients = getDrinkIngredients(drink);
-                    const listItems = ingredients.map(
-                        ({ ingredient, measure }) => {
-                            return `<li class="modal-recipe-item">
-                                        ${ingredient + ' ' + measure}
-                                    </li>`;
-                        }
-                    );
-
-                    $('#modal-drink-name').text(drink.strDrink);
-                    $('#modal-recipe-list').append(listItems);
-                    $('#modal-instructions').text(drink.strInstructions);
-                });
+            $(drinkEl).keypress(ev => {
+                const key = ev.which;
+                if (key === 13 || key === 32) {
+                    openModal();
+                    fetchDrinkById(drink.idDrink);
+                    ev.preventDefault();
+                }
             });
+
+            $(drinkEl).click(() => {
+                openModal();
+                fetchDrinkById(drink.idDrink);
+            });
+
             return drinkEl;
         });
         $('#drink-category-list').append(drinks);
