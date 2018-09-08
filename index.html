@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drink Tip Generator</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <main>
+        <h1>Drink Tip Generator</h1>
+        <p>Choose drinks based on liqour or randomize.</p>
+        <nav>
+            <button id="random-drink-btn" class="button">Random Drink</button>
+            <button id="gin-drinks-btn" class="button">Gin Drinks</button>
+            <button id="vodka-drinks-btn" class="button">Vodka Drinks</button>
+        </nav>
+        <section id="random-drink-section">
+            <div class="random-drink-container">
+                <h3 id="random-drink-heading"></h3>
+                <figure class="figure--big">
+                    <!-- image src and alt is set in main.js -->
+                    <img id="random-drink-image" class="drink-image">
+                </figure>
+                <div class="ingredient-container">
+                <h4>Ingredients</h4>
+                <ul id="ingredient-list" class="list">
+                    <!-- listitems generated from main.js -->
+                </ul>
+            </div>
+            </div>
+            <div>
+                <h4>Instructions</h4>
+                <p id="random-drink-instructions" class="drink-instructions"></p>
+            </div>
+        </section>
+        <section id="drink-category-section">
+            <ul id="drink-category-list" class="list list--wrap">
+                <!-- all drinks from category -->
+            </ul>
+        </section>
+        <dialog id="modal">   
+            <div class="modal-content">
+                <div class="modal-content-container">
+                    <div id="modal-recipe-details">
+                        <h3 id="modal-drink-name"></h3>
+                        <h4>Ingredients</h4>
+                        <ul id="modal-recipe-list" class="list">
+                            <!-- ingredients -->
+                        </ul>
+                        <h4>Instructions</h4>
+                        <p id="modal-instructions" class="drink-instructions"></p>
+                    </div>
+                    <div class="button-container">
+                        <button id="button--close">Close</button>
+                    </div>
+                </div>
+            </div>
+        </dialog>
+    </main>
+    <script src="jquery-3.3.1.min.js"></script>
+    <script src="main.js"></script>
+</body>
+</html>
