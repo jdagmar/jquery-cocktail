@@ -23,7 +23,7 @@ const fetchRandomDrink = () => {
         // get drinks ingredients and returns them as listitems
         const ingredients = getDrinkIngredients(drink);
         const listItems = ingredients.map(({ ingredient, measure }) => {
-            return `<li class="modal-recipe-item">
+            return `<li class="modal-recipe-item" tabIndex="0">
                         ${ingredient + ' ' + measure}
                     </li>`;
         });
@@ -77,7 +77,7 @@ $('#gin-drinks-btn').click(() => {
 
         const drinks = state.gin.drinks.map(drink => {
             const drinkEl = $(
-                `<li class="list-item">
+                `<li class="list-item" tabIndex="0">
                     <figure class="figure">
                         <img id="multiple-drink-image" 
                              class="drink-image"
