@@ -1,4 +1,4 @@
-# jQuery-cocktail 
+# jQuery-cocktail 🍹
 Fetches random drink recipes or by ingredient.
 
 ### Background
