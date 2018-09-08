@@ -58,7 +58,8 @@ main {
     position: relative;
 }
 
-.figure:hover .hover-text {
+.figure:hover .hover-text,
+.list-item:focus .hover-text {
     visibility: visible;
 }
 
